@@ -24,9 +24,14 @@ const strengthLabel = document.querySelector(".strength-label");
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const symbols = ["@", "$", "#", "%", "&", "*", "?", "!"];
 const characterCodes = Array.from(Array(26)).map((_, i) => i + 97);
+
+
+
 const lowerCaseLetters = characterCodes.map((code) =>
   String.fromCharCode(code)
 );
+
+
 const upperCaseLetters = lowerCaseLetters.map((letter) => letter.toUpperCase());
 
 function upgradePassword() {
@@ -65,9 +70,10 @@ const generate = (
   if (hasNumbers) optionsCount++;
   if (hasSymbols) optionsCount++;
   
-  if (length  < 1 || optionsCount === 0) {
+  if (length  === 1 || optionsCount === 0) {
     strengthBar.style.backgroundImage = "url(./images/empty.png)";
     strengthLabel.textContent = "Need More";
+    return "";
   } else if (length < 6) {
     strengthBar.style.backgroundImage = "url(./images/to_weak.png)";
     strengthLabel.textContent = "TOO WEAK!";
