@@ -281,3 +281,8 @@ color: var(--gray-text);
 
 
 }
+
+.notactive{
+background: #0D686D;
+pointer-events: none;
+}
