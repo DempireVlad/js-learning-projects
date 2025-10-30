@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Roboto+Slab:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Pomodoro</title>
+</head>
+
+<body>
+    <div class="container">
+        <img src="./images/logo.svg" alt="Pomodoro logo">
+
+        <nav class="modes">
+            <button class="mode " data-time="1500" data-mode="pomodoro">Pomodoro</button>
+            <button class="mode" data-time="300" data-mode="short">Short Break</button>
+            <button class="mode" data-time="900" data-mode="long">Long Break</button>
+        </nav>
+        <section class="circle">
+            <div class="timer">
+
+
+                <svg class="progress-ring" width="366" height="366">
+                    <circle class="progress-ring__circle" stroke="var(--active)" stroke-width="10" fill="transparent"
+                        r="173" cx="183" cy="183" />
+                </svg>
+
+
+
+
+                <div class="time-display">25:00</div>
+                <button class="timer-btn">PAUSE</button>
+            </div>
+        </section>
+
+        <button class="settings-btn"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                <path fill="#D7E0FF"
+                    d="M26.965 17.682l-2.927-2.317c.055-.448.097-.903.097-1.365 0-.462-.042-.917-.097-1.365l2.934-2.317a.702.702 0 00.167-.896l-2.775-4.851a.683.683 0 00-.847-.301l-3.454 1.407a10.506 10.506 0 00-2.345-1.379l-.52-3.71A.716.716 0 0016.503 0h-5.55a.703.703 0 00-.687.588l-.52 3.71c-.847.357-1.63.819-2.345 1.379L3.947 4.27a.691.691 0 00-.847.301L.325 9.422a.705.705 0 00.167.896l2.927 2.317c-.055.448-.097.903-.097 1.365 0 .462.042.917.097 1.365L.492 17.682a.702.702 0 00-.167.896L3.1 23.429a.683.683 0 00.847.301L7.4 22.323a10.506 10.506 0 002.345 1.379l.52 3.71c.056.329.34.588.687.588h5.55a.703.703 0 00.687-.588l.52-3.71c.847-.357 1.631-.819 2.346-1.379l3.454 1.407c.313.119.673 0 .847-.301l2.775-4.851a.705.705 0 00-.167-.896zM13.73 18.9c-2.685 0-4.857-2.191-4.857-4.9 0-2.709 2.172-4.9 4.857-4.9 2.684 0 4.856 2.191 4.856 4.9 0 2.71-2.172 4.9-4.856 4.9z" />
+            </svg></button>
+        <div class="modal active">
+            <div class="modal-content">
+                <h2>Settings</h2>
+                <hr>
+                <h4>TIME (MINUTES)</h4>
+                <div class="time-settings">
+                    <div class="break-settings">
+                        <label for="pomodoro">Pomodoro </label>
+                        <div class="number-input">
+                            <input type="number" id="pomodoro" name="pomodoro" value="25" min="1" max="60" />
+                            <div class="arrows">
+                                <button class="arrow up" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 6l6-4 6 4" />
+                                    </svg>
+                                </button>
+                                <button class="arrow down" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 1l6 4 6-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="break-settings">
+                        <label for="short-break">Short Break</label>
+                        <div class="number-input">
+                            <input type="number" id="short-break" name="short-break" value="5" min="1" max="15" />
+                            <div class="arrows">
+                                <button class="arrow up" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 6l6-4 6 4" />
+                                    </svg>
+                                </button>
+                                <button class="arrow down" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 1l6 4 6-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="break-settings">
+                        <label for="long-break">Long Break</label>
+                        <div class="number-input">
+                            <input type="number" id="long-break" name="long-break" value="15" min="1" max="30" />
+                            <div class="arrows">
+                                <button class="arrow up" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 6l6-4 6 4" />
+                                    </svg>
+                                </button>
+                                <button class="arrow down" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="7">
+                                        <path fill="none" stroke="#1E213F" stroke-opacity=".25" stroke-width="2"
+                                            d="M1 1l6 4 6-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-btn" aria-label="Close modal">&times;</button>
+                <hr>
+                <div class="text-and-color">
+                    <p>FONT</p>
+                    <div class="font-options">
+                        <input type="radio" name="font" id="font1" checked>
+                        <label for="font1"><span>Aa</span></label>
+
+                        <input type="radio" name="font" id="font2">
+                        <label for="font2"><span>Aa</span></label>
+
+                        <input type="radio" name="font" id="font3">
+                        <label for="font3"><span>Aa</span></label>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-and-color">
+                    <p>COLOR</p>
+                    <div class="color-options">
+                        <input type="radio" name="color" id="color1" checked>
+                        <input type="radio" name="color" id="color2">
+                        <input type="radio" name="color" id="color3">
+                    </div>
+                </div>
+                <button class="apply-btn">Apply</button>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
