@@ -48,6 +48,10 @@ body {
     
 }
 
+.mode:hover {
+    color: var(--light);
+}
+
 
 .circle {
     width: 410px;
