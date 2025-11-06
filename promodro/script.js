@@ -69,7 +69,7 @@ applyBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-btnModes.forEach((btn) => {
+btnModes.forEach((btn, index) => {
   btn.addEventListener("click", () => {
     btnModes.forEach((b) => {
       b.classList.remove("active_color");
@@ -77,48 +77,10 @@ btnModes.forEach((btn) => {
     });
     btn.classList.add("active_color");
     btn.style.backgroundColor = currentColor;
-  });
-});
-// Оновлення дисплея часу при зміні режиму(кнопок)
-btnModes.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn === btnModes[0]) {
-      timeDisplay.textContent = `${pomodoroInput.value}:00`;
-    } else if (btn === btnModes[1]) {
-      timeDisplay.textContent = `${shortInput.value}:00`;
-    } else if (btn === btnModes[2]) {
-      timeDisplay.textContent = `${longInput.value}:00`;
-    }
-  });
-});
 
-// Обробники для кнопок збільшення та зменшення
-up.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button === up[0]) {
-      pomodoroInput.value = Math.min(parseInt(pomodoroInput.value) + 1, 60);
-    } else if (button === up[1]) {
-      shortInput.value = Math.min(parseInt(shortInput.value) + 1, 15);
-    } else if (button === up[2]) {
-      longInput.value = Math.min(parseInt(longInput.value) + 1, 30);
-    }
-  });
-});
+    const times = [pomodoroInput.value, shortInput.value, longInput.value];
+    timeDisplay.textContent = `${times[index]}:00`;
 
-down.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button === down[0]) {
-      pomodoroInput.value = Math.max(parseInt(pomodoroInput.value) - 1, 25);
-    } else if (button === down[1]) {
-      shortInput.value = Math.max(parseInt(shortInput.value) - 1, 1);
-    } else if (button === down[2]) {
-      longInput.value = Math.max(parseInt(longInput.value) - 1, 15);
-    }
-  });
-});
-// Скидання таймера при зміні режиму (кнопок)
-btnModes.forEach((btn) => {
-  btn.addEventListener("click", () => {
     clearInterval(timerInterval);
     isRunning = false;
     timerBtn.textContent = "START";
@@ -127,10 +89,34 @@ btnModes.forEach((btn) => {
   });
 });
 
+
+// Обробники для кнопок збільшення та зменшення значень
+up.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    const inputs = [pomodoroInput, shortInput, longInput];
+    const maxValues = [60, 15, 30];
+    const input = inputs[index];
+    const maxValue = maxValues[index];
+    input.value = Math.min(parseInt(input.value) + 1, maxValue);
+  });
+});
+
+down.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    const inputs = [pomodoroInput, shortInput, longInput];
+    const minValues = [25, 1, 15];
+    const input = inputs[index];
+    const minValue = minValues[index];
+    input.value = Math.max(parseInt(input.value) - 1, minValue);
+  });
+});
+
 let currentTime = 0;
 let timerInterval;
 let isRunning = false;
 let totalTime = 0;
+
+//Функіція форматування часу
 
 function formatTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60);
@@ -138,8 +124,20 @@ function formatTime(totalSeconds) {
   return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 }
 
+
 function updateDisplay(timeInSeconds) {
   timeDisplay.textContent = formatTime(timeInSeconds);
+}
+
+//Отримання часу до вибраного режиму
+function getActiveMode() {
+  if (btnModes[0].classList.contains("active_color")) {
+    return parseInt(pomodoroInput.value) * 60;
+  } else if (btnModes[1].classList.contains("active_color")) {
+    return parseInt(shortInput.value) * 60;
+  } else if (btnModes[2].classList.contains("active_color")) {
+    return parseInt(longInput.value) * 60;
+  }
 }
 
 // Функція для запуску таймера
@@ -148,13 +146,7 @@ function startTimer() {
     isRunning = true;
     timerBtn.textContent = "PAUSE";
     if (currentTime === 0) {
-      if (btnModes[0].classList.contains("active_color")) {
-        currentTime = parseInt(pomodoroInput.value) * 60;
-      } else if (btnModes[1].classList.contains("active_color")) {
-        currentTime = parseInt(shortInput.value) * 60;
-      } else if (btnModes[2].classList.contains("active_color")) {
-        currentTime = parseInt(longInput.value) * 60;
-      }
+      currentTime = getActiveMode();
       totalTime = currentTime;
     }
 
