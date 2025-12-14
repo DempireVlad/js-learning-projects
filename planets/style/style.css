@@ -99,7 +99,7 @@ main {
 
 .burger {
     display: none;
-    /* схована для десктопа */
+  
     flex-direction: column;
     justify-content: space-between;
     width: 24px;
@@ -115,6 +115,12 @@ main {
     width: 100%;
     background: white;
     border-radius: 2px;
+}
+
+.burger_active{
+mix-blend-mode: normal;
+opacity: 0.25;
+
 }
 
 
